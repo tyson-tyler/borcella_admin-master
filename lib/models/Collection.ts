@@ -9,13 +9,18 @@ const collectionSchema = new mongoose.Schema({
   description: String,
   image: {
     type: String,
-    required: true,
+    require: true,
   },
+  link: {
+    type: String,
+    require: true,
+  },
+
   products: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Product",
-    }
+    },
   ],
   createdAt: {
     type: Date,
@@ -24,9 +29,10 @@ const collectionSchema = new mongoose.Schema({
   updatedAt: {
     type: Date,
     default: Date.now,
-  }
-})
+  },
+});
 
-const Collection =mongoose.models.Collection || mongoose.model("Collection", collectionSchema);
+const Collection =
+  mongoose.models.Collection || mongoose.model("Collection", collectionSchema);
 
 export default Collection;

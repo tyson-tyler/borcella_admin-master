@@ -27,6 +27,7 @@ import Loader from "../custom ui/Loader";
 
 const formSchema = z.object({
   title: z.string().min(2).max(20),
+  link: z.string().min(2).max(30000).trim(),
   description: z.string().min(2).max(500).trim(),
   media: z.array(z.string()),
   category: z.string(),
@@ -78,6 +79,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
       : {
           title: "",
           description: "",
+          link: "",
           media: [],
           category: "",
           collections: [],
@@ -168,6 +170,24 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
                   />
                 </FormControl>
                 <FormMessage className="text-red-1" />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="link"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Link</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Link"
+                    {...field}
+                    rows={5}
+                    onKeyDown={handleKeyPress}
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500" />
               </FormItem>
             )}
           />

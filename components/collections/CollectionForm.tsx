@@ -26,6 +26,7 @@ const formSchema = z.object({
   title: z.string().min(2).max(20),
   description: z.string().min(2).max(500).trim(),
   image: z.string(),
+  link: z.string(),
 });
 
 interface CollectionFormProps {
@@ -45,15 +46,20 @@ const CollectionForm: React.FC<CollectionFormProps> = ({ initialData }) => {
           title: "",
           description: "",
           image: "",
+          link: "",
         },
   });
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyPress = (
+    e:
+      | React.KeyboardEvent<HTMLInputElement>
+      | React.KeyboardEvent<HTMLTextAreaElement>
+  ) => {
     if (e.key === "Enter") {
       e.preventDefault();
     }
-  }
-  
+  };
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setLoading(true);
@@ -96,7 +102,11 @@ const CollectionForm: React.FC<CollectionFormProps> = ({ initialData }) => {
               <FormItem>
                 <FormLabel>Title</FormLabel>
                 <FormControl>
-                  <Input placeholder="Title" {...field} onKeyDown={handleKeyPress} />
+                  <Input
+                    placeholder="Title"
+                    {...field}
+                    onKeyDown={handleKeyPress}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -109,7 +119,30 @@ const CollectionForm: React.FC<CollectionFormProps> = ({ initialData }) => {
               <FormItem>
                 <FormLabel>Description</FormLabel>
                 <FormControl>
-                  <Textarea placeholder="Description" {...field} rows={5} onKeyDown={handleKeyPress} />
+                  <Textarea
+                    placeholder="Description"
+                    {...field}
+                    rows={5}
+                    onKeyDown={handleKeyPress}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="link"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>link</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="link"
+                    {...field}
+                    rows={5}
+                    onKeyDown={handleKeyPress}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
